@@ -1,5 +1,5 @@
 <template>
-    Here be forums list
+    <div>Forums list</div>
 
     <ForumItem 
         v-for="forum in forums" 
