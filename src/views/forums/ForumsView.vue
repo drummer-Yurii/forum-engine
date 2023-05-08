@@ -1,22 +1,21 @@
 <template>
-    <div>Forums list</div>
+    <div>Forums</div>
 
+    <TheLoader v-if="!store.forumsLoaded" />
     <ForumItem 
-        v-for="forum in forums" 
+        v-else
+        v-for="forum in store.forums" 
         :key="forum.id"
         :forum="forum"
     />
 </template>
 
 <script setup lang="ts">
-import type { Forum } from '@/api/models/Forum';
 import ForumItem from './ForumItem.vue';
+import TheLoader from '@/components/TheLoader.vue';
+import { useForumStore } from '@/stores/forum';
 
-const forums: Forum[] = [
-    { id: 'Main', description: 'We speak here about everething' },
-    { id: 'Mistakes', description: 'Report of bags' },
-    { id: 'Complaints', description: 'Complaints for moderators' }
-]
+const store = useForumStore();
 </script>
 
 <style scoped>
