@@ -1,26 +1,30 @@
-import type { Forum } from "@/api/models/Forum"
+import type { Forum } from "@/api/models/Forum";
+import forumApi from "@/api/requests/forumApi";
 import { defineStore } from "pinia";
 
-export type  ForumState = {
-    forums: Forum[] | null;
+export type ForumState = {
+  forums: Forum[] | null;
+  selectedForumId?: string | null;
 };
 
 export const useForumStore = defineStore({
-    id: "Forum",
-    state: () => ({
-        forums: null
+  id: "Forum",
+  state: () =>
+    ({
+      forums: null,
     } as ForumState),
-    getters: {
-        forumsLoaded: (state) => state.forums !== null,
+  getters: {
+    forumsLoaded: (state) => state.forums !== null,
+    selectedForum: (state) =>
+      state.forums?.find((f) => f.id === state.selectedForumId),
+  },
+  actions: {
+    async fetchForums(): Promise<void> {
+      const { data } = await forumApi.getForums(); 
+      this.forums = data!.resources;
     },
-    actions: {
-        async fetchForums(): Promise<void> {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            this.forums = [
-                { id: 'Main', description: 'We speak here about everething' },
-                { id: 'Mistakes', description: 'Report of bags' },
-                { id: 'Complaints', description: 'Complaints for moderators' },
-            ];
-        },
+    selectForum(forumId: string) {
+      this.selectedForumId = forumId;
     },
+  },
 });

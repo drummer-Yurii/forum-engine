@@ -1,12 +1,17 @@
 <template>
-    <div>Forum {{ forum.id }}</div>
+    <div>Forum {{ store.selectedForum?.id }}</div>
 </template>
 
 <script setup lang="ts">
+import { useForumStore } from '@/stores/forum';
 import { useRoute } from 'vue-router';
 
 const router = useRoute();
-const forum = { id: router.params.id };
+const forumId = router.params.id as string;
+
+const store = useForumStore();
+store.fetchForums();
+store.selectForum(forumId);
 </script>
 
 <style scoped>
