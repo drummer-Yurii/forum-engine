@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/forums',
       name: 'forums',
       component: () => import("../views/forums/ForumsView.vue"),
+    },
+    {
+      path: '/forums/:id',
+      name: 'forum',
+      component: () => import("../views/topics/TopicsView.vue"),
     }
   ],
 })

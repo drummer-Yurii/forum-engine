@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <div class="title">{{ forumTitle }}</div>
+        <RouterLink 
+            class="title"
+            :to="{ name: 'forum', params: { id: forum.id } }"
+        >
+            {{ forumTitle }}
+        </RouterLink>
         <div class="description">{{ forum.description }}</div>
     </div>
 </template>

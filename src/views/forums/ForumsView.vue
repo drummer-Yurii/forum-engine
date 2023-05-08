@@ -16,6 +16,8 @@ import TheLoader from '@/components/TheLoader.vue';
 import { useForumStore } from '@/stores/forum';
 
 const store = useForumStore();
+
+store.fetchForums();
 </script>
 
 <style scoped>
