@@ -1,16 +1,19 @@
 <template>
     <div class="container">
-        <div class="title">{{ forum.id ?? 'Don\'t have name' }}</div>
+        <div class="title">{{ forumTitle }}</div>
         <div class="description">{{ forum.description }}</div>
     </div>
 </template>
 
 <script setup lang="ts">
 import type { Forum } from '@/api/models/Forum';
+import { computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     forum: Forum
 }>();
+
+const forumTitle = computed(() => props.forum.id ?? 'Don\'t have name');
 </script>
 
 <style scoped>
