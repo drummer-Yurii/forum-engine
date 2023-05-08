@@ -1,22 +1,16 @@
 <template>
     <div class="container">
-        <div class="title">{{ title ?? 'Don\'t have name' }}</div>
-        <div class="description" @click="doStuff">{{ description }}</div>
-        <div v-if="!title">Realy don't have name!!!</div>
+        <div class="title">{{ forum.id ?? 'Don\'t have name' }}</div>
+        <div class="description">{{ forum.description }}</div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import type { Forum } from '@/api/models/Forum';
 
-const title = ref('Main Forum');
-const description = 'Speak here about all!';
-
-function doStuff() {
-    title.value = null;
-    console.log('rename forum');
-    
-}
+defineProps<{
+    forum: Forum
+}>();
 </script>
 
 <style scoped>
